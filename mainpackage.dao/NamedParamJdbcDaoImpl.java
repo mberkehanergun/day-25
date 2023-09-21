@@ -1,5 +1,6 @@
 package mainpackage.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,7 +26,12 @@ import javax.sql.DataSource;
 @Component
 public class NamedParamJdbcDaoImpl extends NamedParameterJdbcDaoSupport {
 	
-	DataSource dataSource = getDataSource();
+	private DataSource dataSource;
+
+	@Autowired
+	public NamedParamJdbcDaoImpl(DataSource dataSource) {
+    	this.dataSource = dataSource;
+	}
 	
 	public List<String> displayPermanentCustomer() {
 		List<String> messages = new ArrayList<>();
